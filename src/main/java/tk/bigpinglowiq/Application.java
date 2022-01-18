@@ -9,6 +9,7 @@ import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import tk.bigpinglowiq.commands.HelpCommand;
 import tk.bigpinglowiq.commands.music.*;
 import tk.bigpinglowiq.events.VoiceLeaveEvent;
+import tk.bigpinglowiq.roleGiver.RoleCommand;
 
 import javax.security.auth.login.LoginException;
 import java.io.BufferedOutputStream;
@@ -19,7 +20,7 @@ import java.util.Arrays;
 
 public class Application {
     private JDA jda;
-    private String key;
+    private final String key;
     private boolean isCrashed = false;
 
     public Application(String apiKey) {
@@ -42,7 +43,8 @@ public class Application {
                 new HelpCommand(),
                 new PauseCommand(),
                 new ShuffleCommand(),
-                new VoiceLeaveEvent());
+                new VoiceLeaveEvent(),
+                new RoleCommand());
         builder.setAutoReconnect(true);
         builder.setMaxReconnectDelay(32);
         builder.setActivity(Activity.listening("manele"));
