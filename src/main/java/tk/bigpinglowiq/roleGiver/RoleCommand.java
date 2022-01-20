@@ -8,8 +8,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 
 public class RoleCommand extends ListenerAdapter {
-    private static final String MODERATOR_ROLE_ID = "932940063120175144";
-    private static final String MEMBER_ROLE_ID = "932940402737180683";
+    private static final String MODERATOR_ROLE_ID = "932718343323009044";
+    private static final String MEMBER_ROLE_ID = "886230337196285993";
     @Override
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent e) {
         String[] message = e.getMessage().getContentRaw().split( " ");
