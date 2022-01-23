@@ -55,7 +55,7 @@ public class RepeatCommand extends ListenerAdapter implements IMusic{
         if(!e.getName().equals("repeat") && e.isFromGuild()) return;
 
 
-        if(isSelfNeedVoice(e) || isSelfInMemberVoice(e)){
+        if(isSelfNeedVoice(e) || !isSelfInMemberVoice(e)){
             return;
         }
 
