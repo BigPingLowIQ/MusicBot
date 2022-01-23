@@ -44,6 +44,7 @@ public class Application {
                 new PauseCommand(),
                 new ShuffleCommand(),
                 new VoiceLeaveEvent(),
+                new SeekCommand(),
                 new RoleCommand());
         builder.setAutoReconnect(true);
         builder.setMaxReconnectDelay(32);
@@ -64,6 +65,7 @@ public class Application {
                     new CommandData("repeat","Repeats the current song."),
                     new CommandData("shuffle","Shuffles the queue."),
                     new CommandData("skip","Skips the current song."),
+                    new CommandData("seek","Skips the song to a desired time"),
                     new CommandData("stop","Stops from playing and clears the queue."),
                     new CommandData("volume","Sets the volume.").addOption(OptionType.INTEGER,"volume","1-100")
             ).queue();

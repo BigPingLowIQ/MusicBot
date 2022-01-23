@@ -3,6 +3,7 @@ package tk.bigpinglowiq.commands.music;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import tk.bigpinglowiq.lavaPlayer.GuildMusicManager;
 import tk.bigpinglowiq.lavaPlayer.PlayerManager;
@@ -12,6 +13,12 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
+
+import java.awt.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class NowPlaying extends ListenerAdapter implements IMusic{
 
@@ -54,6 +61,7 @@ public class NowPlaying extends ListenerAdapter implements IMusic{
             }
 
             AudioTrackInfo info = track.getInfo();
+            EmbedBuilder embed = new EmbedBuilder();
             channel.sendMessageFormat("Now playing `%s` by `%s` (Link: <%s>)",info.title,info.author,info.uri).queue();
 
         }
@@ -68,8 +76,6 @@ public class NowPlaying extends ListenerAdapter implements IMusic{
             return;
         }
 
-
-
         GuildMusicManager musicManager = PlayerManager.getInstance().getMusicManager(e.getGuild());
         AudioPlayer audioPlayer = musicManager.audioPlayer;
 
@@ -79,8 +85,26 @@ public class NowPlaying extends ListenerAdapter implements IMusic{
             e.reply("There is no track currently to play").queue();
             return;
         }
-
         AudioTrackInfo info = track.getInfo();
-        e.replyFormat("Now playing `%s` by `%s` (Link: <%s>)",info.title,info.author,info.uri).queue();
+        EmbedBuilder embed = new EmbedBuilder();
+        embed.setColor(Color.RED);
+        embed.setAuthor("Currently playing");
+        StringBuilder sb = new StringBuilder("**Information**");
+        sb.append('\n')
+                .append("**Title:** ").append(info.title).append('\n')
+                .append("**Duration:** ").append(formatTime(track.getPosition())).append("/").append(formatTime(info.length)).append('\n')
+                .append("**Author:** ").append(info.author).append('\n')
+                .append("**URL:** ").append(info.uri);
+        embed.setDescription(sb);
+        embed.setFooter(e.getMember().getUser().getAsTag(),e.getMember().getUser().getAvatarUrl());
+        e.replyEmbeds(embed.build()).queue();
+    }
+    private String formatTime(long millis){
+        long second = (millis / 1000) % 60;
+        long minute = (millis / (1000 * 60)) % 60;
+        long hour = (millis / (1000 * 60 * 60)) % 24;
+        if(hour==0)
+            return String.format("%02d:%02d", minute, second);
+        return String.format("%02d:%02d:%02d", hour, minute, second);
     }
 }
