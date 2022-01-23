@@ -35,7 +35,7 @@ public class Echoer extends Thread {
                 StringBuilder sb = new StringBuilder();
                 if(echoString.equals("1")){
                     for(Guild guild : TCPStart.getDH().getGuilds()){
-                        sb.append(guild.getName()).append(guild.getIdLong()).append("\t");
+                        sb.append(guild.getName()).append(' ').append(guild.getIdLong()).append("\t");
                     }
 
                 }else if(echoString.equals("2")) {
