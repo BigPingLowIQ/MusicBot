@@ -65,7 +65,10 @@ public class Application {
                     new CommandData("repeat","Repeats the current song."),
                     new CommandData("shuffle","Shuffles the queue."),
                     new CommandData("skip","Skips the current song."),
-                    new CommandData("seek","Skips the song to a desired time"),
+                    new CommandData("seek","Skips the song to a desired time")
+                            .addOption(OptionType.INTEGER,"seconds","",false)
+                            .addOption(OptionType.INTEGER,"minutes","",false)
+                            .addOption(OptionType.INTEGER,"hours","",false),
                     new CommandData("stop","Stops from playing and clears the queue."),
                     new CommandData("volume","Sets the volume.").addOption(OptionType.INTEGER,"volume","1-100")
             ).queue();

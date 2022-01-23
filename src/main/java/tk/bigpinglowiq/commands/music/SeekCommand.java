@@ -7,6 +7,8 @@ import org.jetbrains.annotations.NotNull;
 import tk.bigpinglowiq.lavaPlayer.GuildMusicManager;
 import tk.bigpinglowiq.lavaPlayer.PlayerManager;
 
+import java.util.Objects;
+
 public class SeekCommand extends ListenerAdapter implements IMusic {
 
     @Override
@@ -37,8 +39,42 @@ public class SeekCommand extends ListenerAdapter implements IMusic {
     }
 
     @Override
-    public void onSlashCommand(@NotNull SlashCommandEvent event) {
-        super.onSlashCommand(event);
+    public void onSlashCommand(@NotNull SlashCommandEvent e) {
+        if(!e.getName().equals("seek") && e.isFromGuild()) return;
+
+        if(isSelfNeedVoice(e) || !isSelfInMemberVoice(e)){
+            return;
+        }
+//        long time = e.getOptionsByName("seconds").;
+//        e.getOptionsByName("minutes")
+//                e.getOptionsByName("hours")
+        long seconds,minutes,hours;
+        try {
+             seconds = Objects.requireNonNull(e.getOption("seconds")).getAsLong();
+        }catch (NullPointerException ignored){
+            seconds = 0;
+        }
+        try{
+            minutes = Objects.requireNonNull(e.getOption("minutes")).getAsLong();
+        }catch (NullPointerException ignored){
+            minutes = 0;
+        }
+        try{
+            hours = Objects.requireNonNull(e.getOption("hours")).getAsLong();
+        }catch (NullPointerException ignored){
+            hours = 0;
+        }
+        long time = seconds + minutes*60 + hours*3600;
+
+        GuildMusicManager musicManager = PlayerManager.getInstance().getMusicManager(e.getGuild());
+
+        long duration = musicManager.audioPlayer.getPlayingTrack().getDuration();
+        if(time > duration || time < 0){
+            e.reply("Position is out of bounds.").queue();
+            return;
+        }
+        musicManager.audioPlayer.getPlayingTrack().setPosition(time);
+        e.reply("Seeking to "+formatTime(time)).queue();
     }
 
     private long parseTime(String[] time){
