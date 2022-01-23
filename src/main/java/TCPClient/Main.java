@@ -12,7 +12,15 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        try (Socket socket = new Socket("pihole.lan", 5000)) {
+        String host;
+        try{
+            host = args[0];
+        }catch (IndexOutOfBoundsException e){
+            System.out.println("Please add a host to the arguments");
+            return;
+        }
+
+        try (Socket socket = new Socket(host, 5000)) {
 
             socket.setSoTimeout(5000);
             BufferedReader echoes = new BufferedReader(

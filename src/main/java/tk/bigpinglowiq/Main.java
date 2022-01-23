@@ -24,7 +24,6 @@ public class Main {
 
 
         waitForInternet();
-
         TCPStart.init();
 
         Application app = new Application(apiKey);
