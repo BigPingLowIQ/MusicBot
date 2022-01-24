@@ -65,7 +65,7 @@ public class SeekCommand extends ListenerAdapter implements IMusic {
             hours = 0;
         }
         long time = seconds + minutes*60 + hours*3600;
-
+        time*=1000;
         GuildMusicManager musicManager = PlayerManager.getInstance().getMusicManager(e.getGuild());
 
         long duration = musicManager.audioPlayer.getPlayingTrack().getDuration();
