@@ -1,30 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="musicDataBase@192.168.0.185">
   <database-model serializer="dbm" dbms="MARIADB" family-id="MARIADB" format-version="4.32">
-    <root id="1">
-      <DefaultCasing>exact</DefaultCasing>
-      <DefaultEngine>InnoDB</DefaultEngine>
-      <Grants>musicDataBase|schema||musicDB|192.168.0.239|ALTER|G
-musicDataBase|schema||musicDB|192.168.0.239|ALTER ROUTINE|G
-musicDataBase|schema||musicDB|192.168.0.239|CREATE|G
-musicDataBase|schema||musicDB|192.168.0.239|CREATE ROUTINE|G
-musicDataBase|schema||musicDB|192.168.0.239|CREATE TEMPORARY TABLES|G
-musicDataBase|schema||musicDB|192.168.0.239|CREATE VIEW|G
-musicDataBase|schema||musicDB|192.168.0.239|DELETE|G
-musicDataBase|schema||musicDB|192.168.0.239|DELETE HISTORY|G
-musicDataBase|schema||musicDB|192.168.0.239|DROP|G
-musicDataBase|schema||musicDB|192.168.0.239|EVENT|G
-musicDataBase|schema||musicDB|192.168.0.239|EXECUTE|G
-musicDataBase|schema||musicDB|192.168.0.239|INDEX|G
-musicDataBase|schema||musicDB|192.168.0.239|INSERT|G
-musicDataBase|schema||musicDB|192.168.0.239|LOCK TABLES|G
-musicDataBase|schema||musicDB|192.168.0.239|REFERENCES|G
-musicDataBase|schema||musicDB|192.168.0.239|SELECT|G
-musicDataBase|schema||musicDB|192.168.0.239|SHOW VIEW|G
-musicDataBase|schema||musicDB|192.168.0.239|TRIGGER|G
-musicDataBase|schema||musicDB|192.168.0.239|UPDATE|G</Grants>
-      <ServerVersion>10.3.31</ServerVersion>
-    </root>
+    <root id="1"/>
     <collation id="2" parent="1" name="armscii8_bin">
       <Charset>armscii8</Charset>
     </collation>
