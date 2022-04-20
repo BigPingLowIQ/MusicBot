@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.exceptions.ErrorResponseException;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import tk.bigpinglowiq.commands.HelpCommand;
+import tk.bigpinglowiq.commands.RandomTeam;
 import tk.bigpinglowiq.commands.music.*;
 import tk.bigpinglowiq.events.VoiceLeaveEvent;
 import tk.bigpinglowiq.roleGiver.RoleCommand;
@@ -45,7 +46,8 @@ public class Application {
                 new ShuffleCommand(),
                 new VoiceLeaveEvent(),
                 new SeekCommand(),
-                new RoleCommand());
+                new RoleCommand(),
+                new RandomTeam());
         builder.setAutoReconnect(true);
         builder.setMaxReconnectDelay(32);
         builder.setActivity(Activity.listening("manele"));
